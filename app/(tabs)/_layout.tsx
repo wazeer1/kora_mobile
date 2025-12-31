@@ -1,33 +1,83 @@
+import { CurvedTabBar } from '@/components/ui/CurvedTabBar';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
+      tabBar={(props) => <CurvedTabBar {...props} />}
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
       }}>
+
+      {/* 1. Arena (Home) */}
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Arena',
+          tabBarIcon: ({ color, focused }) => <IconSymbol size={26} name={focused ? 'house.fill' : 'house'} color={color} />,
         }}
       />
+
+      {/* 2. Search (Explore) */}
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => <IconSymbol size={26} name={focused ? 'magnifyingglass' : 'magnifyingglass'} color={color} />, // Magnifying glass usually single style
+        }}
+      />
+
+      {/* 3. CENTER (Speak) */}
+      <Tabs.Screen
+        name="create_placeholder"
+        options={{
+          title: 'Speak',
+          href: null,
+        }}
+        listeners={() => ({
+          tabPress: (e) => {
+            e.preventDefault();
+          }
+        })}
+      />
+
+      {/* 4. Activity (Alerts) */}
+      <Tabs.Screen
+        name="activity"
+        options={{
+          title: 'Activity',
+          tabBarIcon: ({ color, focused }) => <IconSymbol size={26} name={focused ? 'bell.fill' : 'bell'} color={color} />,
+        }}
+      />
+
+      {/* 5. Profile (You) */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, focused }) => <IconSymbol size={26} name={focused ? 'person.circle.fill' : 'person.circle'} color={color} />,
+        }}
+      />
+
+      {/* Helper/Hidden routes */}
+      <Tabs.Screen
+        name="ladder"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="index"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="live"
+        options={{
+          href: null,
         }}
       />
     </Tabs>

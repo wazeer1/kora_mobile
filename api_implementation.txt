@@ -1,0 +1,164 @@
+API & Socket-to-Screen Implementation Mapping
+
+Authentication & Onboarding
+​
+
+POST /v1/auth/login -- Login Screen
+
+POST /v1/auth/magic-link -- Magic Link Screen
+
+POST /v1/auth/verify-otp -- OTP Verification Screen
+
+GET /v1/auth/check-handle -- Onboarding (Handle Setup)
+
+PUT /v1/user/onboarding -- Onboarding (Avatar & Topics Setup)
+
+Home & Dashboard
+​
+
+GET /v1/home/priority-stack -- Home Dashboard (Command Center)
+
+GET /v1/home/timeline -- Home Dashboard (Timeline Rail)
+
+GET /v1/home/feed -- Home Dashboard (Discovery Feed)
+
+Debate Creation & Setup
+​
+
+POST /v1/debate/create -- Debate Creation Wizard (Architect Mode)
+
+PUT /v1/debate/{id}/rules -- Debate Creation Wizard (Rules Configuration)
+
+POST /v1/debate/{id}/invite-leader -- Debate Creation Wizard (Captain Draft)
+
+POST /v1/debate/schedule -- Debate Scheduling Screen
+
+Lobby & Team Management
+​
+
+GET /v1/debate/{id}/lobby-state -- Green Room (Lobby Screen)
+
+POST /v1/debate/{id}/join-team -- Green Room (Accept/Decline Invite)
+
+POST /v1/debate/{id}/kick-member -- Green Room (Captain Controls)
+
+POST /v1/debate/{id}/toggle-ready -- Green Room (Ready Button)
+
+POST /v1/debate/{id}/start -- Green Room (Start Debate Button)
+
+POST /v1/debate/{id}/cancel -- Debate Management (Cancel Debate)
+
+War Ground (Live Debate)
+​
+
+GET /v1/debate/{id}/state -- War Ground (Live Engine, Timer Sync)
+
+POST /v1/debate/{id}/pause -- War Ground (Host Controls)
+
+POST /v1/debate/{id}/mic/request -- War Ground (Raise Hand)
+
+POST /v1/debate/{id}/mic/grant -- War Ground (Captain's Cockpit, Grant Mic)
+
+POST /v1/debate/{id}/mic/yield -- War Ground (Speaker Yield)
+
+POST /v1/debate/{id}/mic/mute-all -- War Ground (Host Nuke Button)
+
+POST /v1/debate/{id}/evidence/upload -- War Ground (Evidence Upload Panel)
+
+POST /v1/debate/{id}/evidence/present -- War Ground (Presentation Mode)
+
+POST /v1/debate/{id}/vote -- War Ground (Audience Sentiment Slider)
+
+POST /v1/debate/{id}/react -- War Ground (Emoji Reactions)
+
+POST /v1/debate/{id}/flag -- War Ground (Fallacy/Citation Flags)
+
+POST /v1/debate/{id}/request-join -- War Ground (Spectator Join Request)
+
+GET /v1/debate/{id}/participants -- War Ground (Roster Display)
+
+Post-Game & Results
+​
+
+GET /v1/debate/{id}/summary -- Game Report Screen (Results Summary)
+
+POST /v1/debate/{id}/ai-analyze -- Game Report Screen (Trigger AI Analysis)
+
+POST /v1/debate/{id}/ai-analyze/retry -- Admin Dashboard (Retry Failed Analysis)
+
+User Profile & Stats
+​
+
+PUT /v1/user/{id}/profile -- User Profile Edit Screen
+
+GET /v1/user/{id} -- User Profile View Screen
+
+GET /v1/user/{id}/stats -- User Stats & Badges Screen
+
+Social & Competition
+​
+
+POST /v1/user/{id}/challenge -- Challenge/Gauntlet Screen
+
+POST /v1/challenge/{id}/accept -- Challenge Card (Accept Action)
+
+POST /v1/challenge/{id}/decline -- Challenge Card (Decline Action)
+
+GET /v1/leaderboard -- Leaderboard Screen (Global/Local/Friends)
+
+Discovery & Search
+​
+
+GET /v1/explore/search -- Explore/Search Screen
+
+GET /v1/explore/gauntlet -- Gauntlet/Open Challenges Screen
+
+Notifications
+​
+
+GET /v1/notifications -- Notification Center
+
+PUT /v1/notifications/{id}/read -- Notification Center (Mark Read)
+
+POST /v1/notifications/{id}/respond -- Notification Cards (Accept/Decline Inline)
+
+Reporting & Moderation
+​
+
+POST /v1/report -- Report User Modal (During/After Debate)
+
+Socket Events
+​
+
+War Ground (Live Debate) Real-Time Updates
+​
+
+debate:timer_update -- War Ground (Timer Display, Time Sync)
+
+debate:mic_change -- War Ground (Speaker Highlight, Queue Display, Mic Icon)
+
+debate:view_mode_change -- War Ground (Grid ↔ Presentation Mode Switch)
+
+team:chat_message -- War Ground (Team Strategy Chat Panel)
+
+debate:hand_raised -- War Ground (Captain's Cockpit, Queue Update)
+
+debate:speaker_yielded -- War Ground (Speaker Change, Queue Advance)
+
+debate:participant_joined -- War Ground & Green Room (Roster Update, Hex Grid Update)
+
+debate:evidence_added -- War Ground (Evidence Sidebar, Presentation List)
+
+debate:sentiment_update -- War Ground (Tug-of-War Slider Animation)
+
+debate:paused -- War Ground (Pause Overlay, Timer Freeze)
+
+debate:resumed -- War Ground (Resume Overlay, Timer Resume)
+
+debate:started -- Green Room → War Ground (Transition to Live, Init State)
+
+debate:ended -- War Ground → Game Report (Debate Closure, Transition to Results)
+
+debate:verdict_ready -- Game Report Screen (Show AI Analysis Results)
+
+error -- All Screens (Error Notification, Disconnect Handling)
