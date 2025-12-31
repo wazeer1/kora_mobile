@@ -1,50 +1,117 @@
-# Welcome to your Expo app 👋
+# Kora Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Kora is a modern mobile application built with React Native and Expo, designed to facilitate vibrant community interactions and debates. It features real-time capabilities, a comprehensive theming system, and a robust architecture.
 
-## Get started
+## Overview
 
-1. Install dependencies
+The application is structured around five main pillars accessible via the bottom navigation:
+- **Arena (Home)**: The central dashboard for trending content and live debates.
+- **Explore**: A powerful search and discovery interface.
+- **Speak**: Tools for creating content and initiating discussions.
+- **Activity**: Real-time alerts and notifications.
+- **Profile**: User personalization and settings.
 
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-2. Start the app
+### Prerequisites
 
-   ```bash
-   npx expo start
-   ```
+Ensure you have the following installed on your development machine:
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Expo Go](https://expo.dev/client) app on your iOS/Android device or an Emulator/Simulator.
 
-In the output, you'll find options to open the app in a
+### Installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd Kora
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Get a fresh project
+### Running the App
 
-When you're ready, run:
+Start the development server:
 
 ```bash
-npm run reset-project
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This will launch the Expo development server. You can then:
+- Scan the QR code with **Expo Go** (Android) or the Camera app (iOS).
+- Press `a` to open in an **Android Emulator**.
+- Press `i` to open in an **iOS Simulator**.
+- Press `w` to open in the **Web Browser**.
 
-## Learn more
+## Project Structure
 
-To learn more about developing your project with Expo, look at the following resources:
+The project follows a modular architecture using **Expo Router**:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **`app/`**: Contains the file-based routing logic.
+    - `(tabs)/`: Main tab-based navigation layout.
+    - `(auth)/`: Authentication screens.
+    - `_layout.tsx`: Root layout configuration.
+- **`src/`**: Core application logic.
+    - `components/`: Reusable UI components.
+    - `hooks/`: Custom React hooks (e.g., `useTheme`).
+    - `store/`: Redux Toolkit state management slices and store configuration.
+    - `theme/`: Design tokens and theme context.
+    - `context/`: React Context Providers (e.g., `SocketContext`).
 
-## Join the community
+## Themes & UI
 
-Join our community of developers creating universal apps.
+Kora supports both **Light** and **Dark** modes, adapting to the user's system preference or manual override.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Theme Usage
+
+We use a custom `ThemeProvider` combined with `styled-components`.
+
+```typescript
+import { useTheme } from '@/src/hooks';
+
+const MyComponent = () => {
+    const theme = useTheme();
+    return <Text style={{ color: theme.colors.primary }}>Hello Kora</Text>;
+}
+```
+
+### Color Palette
+
+The application uses a teal-based primary color scheme:
+
+| Color | Light Mode | Dark Mode |
+|-------|------------|-----------|
+| **Primary** | `#208D9E` | `#32B8C6` |
+| **Background** | `#F8F8F6` | `#1F2121` |
+| **Surface** | `#FFFFFF` | `#2A2A2A` |
+| **Text** | `#1A1A1A` | `#F5F5F5` |
+
+## Key Packages
+
+This project relies on several key libraries:
+
+- **Core**: `react-native`, `expo`
+- **Navigation**: `expo-router`, `@react-navigation/native`
+- **State Management**: `@reduxjs/toolkit`, `react-redux`
+- **Styling**: `styled-components`, `lucide-react-native` (Icons)
+- **Networking**: `axios`, `socket.io-client`
+- **Native Features**:
+    - `expo-haptics`
+    - `expo-image-picker`
+    - `expo-secure-store`
+    - `react-native-reanimated`
+    - `react-native-gesture-handler`
+
+## Scripts
+
+- `npm run start`: Start the Expo dev server.
+- `npm run android`: Run on Android emulator/device.
+- `npm run ios`: Run on iOS simulator/device.
+- `npm run lint`: Lint the codebase.
+
+---
+
+Built with ❤️ using Expo.
